@@ -1,0 +1,45 @@
+<h1>Management Login</h1>
+
+<form id="otpForm">
+    <input type="email" id="email" name="email" required placeholder="Enter your email">
+    <button type="button" id="sendOTP">Send OTP</button>
+    <div id="otpSection" style="display: none;">
+        <input type="text" id="otp" name="otp" required placeholder="Enter OTP">
+        <button type="submit">Verify OTP</button>
+    </div>
+</form>
+
+<script>
+document.getElementById('sendOTP').addEventListener('click', async () => {
+    const email = document.getElementById('email').value;
+    const response = await fetch('/anagha/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+    });
+    const result = await response.json();
+    if (result.success) {
+        alert('OTP sent successfully');
+        document.getElementById('otpSection').style.display = 'block';
+    } else {
+        alert('Failed to send OTP');
+    }
+});
+
+document.getElementById('otpForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const otp = document.getElementById('otp').value;
+    const response = await fetch('/anagha/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, otp })
+    });
+    const result = await response.json();
+    if (result.success) {
+        window.location.href = '/anagha/dashboard';
+    } else {
+        alert('Invalid OTP');
+    }
+});
+</script>

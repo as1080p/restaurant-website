@@ -1,0 +1,10 @@
+<h1>Manage Orders</h1>
+
+<% orders.forEach(order => { %>
+    <div>
+        <p>Order ID: <%= order._id %></p>
+        <p>User: <%= order.user.username %></p>
+        <p>Total: ₹<%= order.total %></p>
+        <p>Status: <%= order.status %></p>
+    </div>
+<% }) %>

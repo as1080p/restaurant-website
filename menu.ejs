@@ -1,0 +1,30 @@
+<h1>Manage Menu</h1>
+
+<h2>Add New Item</h2>
+<form action="/admin/menu/add" method="POST">
+    <input type="text" name="name" placeholder="Item Name" required>
+    <input type="text" name="description" placeholder="Description" required>
+    <input type="number" name="price" placeholder="Price" required>
+    <input type="text" name="category" placeholder="Category" required>
+    <button type="submit">Add Item</button>
+</form>
+
+<h2>Current Menu</h2>
+<% menuItems.forEach(item => { %>
+    <div>
+        <h3><%= item.name %></h3>
+        <p><%= item.description %></p>
+        <p>Price: ₹<%= item.price %></p>
+        <p>Category: <%= item.category %></p>
+        <form action="/admin/menu/edit/<%= item._id %>" method="POST">
+            <input type="text" name="name" value="<%= item.name %>" required>
+            <input type="text" name="description" value="<%= item.description %>" required>
+            <input type="number" name="price" value="<%= item.price %>" required>
+            <input type="text" name="category" value="<%= item.category %>" required>
+            <button type="submit">Update</button>
+        </form>
+        <form action="/admin/menu/delete/<%= item._id %>" method="POST">
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+<% }) %>

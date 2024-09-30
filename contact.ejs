@@ -1,0 +1,71 @@
+<div class="contact-container">
+    <h1>Contact Us</h1>
+    
+    <div class="contact-info">
+        <div class="info-section">
+            <h2>Address</h2>
+            <p><%= restaurant.address %></p>
+        </div>
+        
+        <div class="info-section">
+            <h2>Phone</h2>
+            <p><%= restaurant.phoneNumber %></p>
+        </div>
+        
+        <div class="info-section">
+            <h2>Email</h2>
+            <p>info@<%= restaurant.name.toLowerCase().replace(/\s/g, '') %>.com</p>
+        </div>
+        
+        <div class="info-section">
+            <h2>Opening Hours</h2>
+            <p><%= restaurant.openingHours %></p>
+        </div>
+    </div>
+
+    <div class="contact-form">
+        <h2>Send us a message</h2>
+        <form action="/contact" method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+
+            <button type="submit" class="submit-button">Send Message</button>
+        </form>
+    </div>
+
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+</div>
+
+<script>
+    function initMap() {
+        const restaurantLocation = { lat: 40.7128, lng: -74.0060 }; // Replace with actual coordinates
+        const map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: restaurantLocation
+        });
+        const marker = new google.maps.Marker({
+            position: restaurantLocation,
+            map: map
+        });
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>

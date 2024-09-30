@@ -1,0 +1,50 @@
+<div class="hero-section">
+    <h1><%= restaurant.name %></h1>
+    <p class="tagline"><%= restaurant.description %></p>
+</div>
+
+<div class="content-container">
+    <section class="about-section">
+        <h2>Welcome to <%= restaurant.name %></h2>
+        <p><%= restaurant.description %></p>
+        <img src="<%= restaurant.imageUrl %>" alt="<%= restaurant.name %>" class="restaurant-image">
+    </section>
+
+    <section class="cuisine-section">
+        <h2>Our Cuisine</h2>
+        <p><%= restaurant.cuisine %></p>
+        <a href="/menu" class="cta-button">View Our Menu</a>
+    </section>
+
+    <section class="hours-section">
+        <h2>Opening Hours</h2>
+        <p><%= restaurant.openingHours %></p>
+    </section>
+
+    <section class="location-section">
+        <h2>Visit Us</h2>
+        <p><%= restaurant.address %></p>
+        <div id="map" class="map-container"></div>
+    </section>
+
+    <section class="contact-section">
+        <h2>Contact Us</h2>
+        <p>Phone: <%= restaurant.phoneNumber %></p>
+        <a href="/contact" class="cta-button">Get in Touch</a>
+    </section>
+</div>
+
+<script>
+    function initMap() {
+        const restaurantLocation = { lat: 40.7128, lng: -74.0060 }; // Replace with actual coordinates
+        const map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: restaurantLocation
+        });
+        const marker = new google.maps.Marker({
+            position: restaurantLocation,
+            map: map
+        });
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>

@@ -1,0 +1,19 @@
+<h1>Manage Bookings</h1>
+
+<% bookings.forEach(booking => { %>
+    <div>
+        <p>User: <%= booking.user.username %></p>
+        <p>Date: <%= booking.date.toDateString() %></p>
+        <p>Time: <%= booking.time %></p>
+        <p>Guests: <%= booking.guests %></p>
+        <p>Status: <%= booking.status %></p>
+        <form action="/admin/bookings/update/<%= booking._id %>" method="POST">
+            <select name="status">
+                <option value="pending" <%= booking.status === 'pending' ? 'selected' : '' %>>Pending</option>
+                <option value="confirmed" <%= booking.status === 'confirmed' ? 'selected' : '' %>>Confirmed</option>
+                <option value="cancelled" <%= booking.status === 'cancelled' ? 'selected' : '' %>>Cancelled</option>
+            </select>
+            <button type="submit">Update Status</button>
+        </form>
+    </div>
+<% }) %>
